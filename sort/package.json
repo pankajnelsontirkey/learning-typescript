@@ -1,6 +1,14 @@
 {
   "name": "sort",
   "packageManager": "yarn@4.4.0",
+  "main": "index.js",
+  "scripts": {
+    "start:build": "yarn tsc -w",
+    "start:run": "nodemon build/index.js",
+    "start": "concurrently \"yarn:start:*\""
+  },
+  "author": "pankajnelsontirkey",
+  "license": "MIT",
   "devDependencies": {
     "typescript": "^5.5.4"
   },

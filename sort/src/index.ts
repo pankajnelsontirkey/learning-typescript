@@ -1,9 +1,15 @@
+import { CharactersCollection } from "./CharactersCollection";
 import { NumbersCollection } from "./NumberCollection";
 import { Sorter } from "./Sorter";
 
 const numbersCollection = new NumbersCollection([10, 3, -5, 0]);
-const sorter = new Sorter(numbersCollection);
+const charactersCollection = new CharactersCollection("tyPescRipT");
 
-sorter.sort();
+const numberSorter = new Sorter(numbersCollection);
+const charSorter = new Sorter(charactersCollection);
+
+numberSorter.sort();
+charSorter.sort();
 
 console.log(numbersCollection.data);
+console.log(charactersCollection.data);

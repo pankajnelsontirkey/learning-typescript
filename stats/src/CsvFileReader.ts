@@ -1,11 +1,11 @@
 import fs from 'fs';
 
-export abstract class CsvFileReader {
-  data: any = [];
+export abstract class CsvFileReader<T> {
+  data: T[] = [];
 
   constructor(public filename: string) {}
 
-  abstract mapRow(row: string[]): /* MatchData */ any;
+  abstract mapRow(row: string[]): T;
 
   read(): void {
     this.data = fs

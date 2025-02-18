@@ -1,5 +1,6 @@
 // import fs from 'fs';
 import { CsvFileReader } from './CsvFileReader';
+import { dateStringToDate } from './utils';
 
 // const matches = fs
 //   .readFileSync('football.csv', { encoding: 'utf-8' })

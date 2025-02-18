@@ -1,5 +1,6 @@
 // import fs from 'fs';
 import { CsvFileReader } from './CsvFileReader';
+import { MatchReader } from './MatchReader';
 import { MatchResult } from './MatchResults';
 
 // const matches = fs
@@ -7,7 +8,8 @@ import { MatchResult } from './MatchResults';
 //   .split('\n')
 //   .map((row: string): string[] => row.split(','));
 
-const reader = new CsvFileReader('football.csv');
+// const reader = new CsvFileReader('football.csv');
+const reader = new MatchReader('football.csv');
 reader.read();
 
 // const MatchResult = {

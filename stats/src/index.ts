@@ -4,9 +4,7 @@ import { MatchReader } from './MatchReader';
 import { ConsoleReport } from './reportTargets/ConsoleReport';
 import { Summary } from './Summary';
 
-const csvFileReader = new CsvFileReader('football.csv');
-
-const matchReader = new MatchReader(csvFileReader);
+const matchReader = MatchReader.fromCsv('football.csv');
 
 matchReader.load();
 
@@ -15,8 +13,9 @@ const summary = new Summary(
   new WinsAnalysis('Man United'),
   new ConsoleReport()
 );
-
 summary.buildAndPrintReport(matchReader.matches);
 
 /* No. of 'Liverpool' wins as html report... */
-Summary.winsForTeamHtmlReport('Liverpool');
+Summary.winsForTeamHtmlReport('Liverpool').buildAndPrintReport(
+  matchReader.matches
+);

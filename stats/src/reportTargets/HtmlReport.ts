@@ -14,7 +14,7 @@ export class HtmlReport implements OutputTarget {
     `;
 
     fs.writeFileSync(
-      `generatedReports/${this.outputHtmlFileName ?? 'report.html'}`,
+      `reports/${this.outputHtmlFileName ?? 'report.html'}`,
       html
     );
   }

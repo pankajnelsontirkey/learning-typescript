@@ -1,10 +1,21 @@
-import axios from 'axios';
+import { User } from './models/User';
 
-const res = axios.post('http://localhost:3000/users', {
-  name: 'Pankaj',
-  age: 34
-});
+// const user = new User({ name: 'Pankaj Nelson Tirkey', age: 35 });
+// console.log(user['data']);
+// user.save();
 
-res.then(({ data }) => {
-  console.log('res', data);
-});
+const user = new User({ id: 1 });
+user.fetch();
+console.log(user['data']);
+
+// user.set({ name: 'Pankaj Nelson Tirkey', age: 35 });
+// user.save();
+// console.log(user['data']);
+
+// const user2 = new User({ name: 'Vineeta Minj', age: 33 });
+// console.log(user2['data']);
+// user2.save();
+
+const user2 = new User({ id: 2 });
+user2.fetch();
+console.log(user2['data']);

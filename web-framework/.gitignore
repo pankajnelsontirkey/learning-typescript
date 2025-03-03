@@ -3,3 +3,5 @@ dist
 .parcel*
 
 node_modules
+
+db.json

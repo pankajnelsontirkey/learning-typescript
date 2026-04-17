@@ -31,7 +31,7 @@ function parameterDecorator(target: any, key: string, index: number) {
 }
 
 function testDecorator(target: any, key: string) {
-  console.log('[testDecorator] key: ', key);
+  console.log('[testDecorator] - target - key: ', target, key);
 }
 
 function logError(errorMessage: string) {

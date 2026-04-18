@@ -1,4 +1,4 @@
-import 'reflect-metadata';
+// import 'reflect-metadata';
 
 // const plane = {
 //   color: 'red'
@@ -20,18 +20,28 @@ import 'reflect-metadata';
 
 // const note = Reflect.getMetadata('note', plane, 'color');
 
+import 'reflect-metadata';
+
+@printMetadata
 class Plane {
   color: string = 'red';
 
-  @markFunction
+  @markFunction('The launch codes!')
   fly(): void {
     console.log('shooom!');
   }
 }
 
-function markFunction(target: Plane, key: string) {
-  Reflect.defineMetadata('secret', 123, target, key);
+function markFunction(secretInfo: string) {
+  return function (target: Plane, key: string) {
+    Reflect.defineMetadata('secret', secretInfo, target, key);
+  };
 }
 
-const secret = Reflect.getMetadata('secret', Plane.prototype, 'fly');
-console.log('secret', secret);
+function printMetadata(target: typeof Plane) {
+  for (const key of Object.getOwnPropertyNames(target.prototype)) {
+    if (key === 'constructor') continue;
+    const secret = Reflect.getMetadata('secret', target.prototype, key);
+    console.log('secret', secret);
+  }
+}

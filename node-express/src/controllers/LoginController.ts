@@ -3,7 +3,7 @@ import type { Request, Response } from 'express';
 import { controller } from './decorators/controller.js';
 import { get } from './decorators/routes.js';
 
-@controller('/')
+@controller('/auth')
 class LoginController {
   @get('/login')
   getLogin(req: Request, res: Response): void {

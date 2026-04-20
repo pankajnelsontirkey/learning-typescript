@@ -1,14 +1,11 @@
-import { NextFunction, Request, Response } from 'express';
+import type { NextFunction, Request, Response } from 'express';
+
 import { bodyValidator, controller, get, post, use } from './decorators';
 
-interface RequestWithBody extends Request {
-  body: { [key: string]: string | undefined };
-}
-
-export const logger = (req: Request, res: Response, next: NextFunction) => {
-  console.log(`Request received at ${req.path}`);
+function logger(req: Request, res: Response, next: NextFunction) {
+  console.log('Request was made!');
   next();
-};
+}
 
 @controller('/auth')
 class LoginController {
@@ -25,22 +22,18 @@ class LoginController {
           <label>Password</label>
           <input name="password" type="password" />
         </div>
-        <button type="submit">Login</button>
+        <button>Submit</button>
       </form>
     `);
   }
 
   @post('/login')
+  @use(logger)
   @bodyValidator('email', 'password')
-  postLogin(req: RequestWithBody, res: Response) {
+  postLogin(req: Request, res: Response) {
     const { email, password } = req.body;
 
-    if (
-      // email &&
-      // password &&
-      email === 'test@test.com' &&
-      password === 'testing'
-    ) {
+    if (email === 'pankaj@mail.com' && password === 'testing') {
       req.session = { loggedIn: true };
       res.redirect('/');
     } else {
@@ -48,7 +41,6 @@ class LoginController {
     }
   }
 
-  // router.get('/logout',
   @get('/logout')
   getLogout(req: Request, res: Response) {
     req.session = undefined;

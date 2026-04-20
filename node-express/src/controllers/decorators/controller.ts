@@ -1,35 +1,35 @@
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import 'reflect-metadata';
 
-import { AppRouter } from '../../appRouter';
+import { AppRouter } from '../../AppRouter';
 import { MetadataKeys } from './MetadataKeys';
 import { Methods } from './Methods';
 
-function bodyValidators(keys: string): RequestHandler {
+function bodyValidators(keys: string[]): RequestHandler {
   return function (req: Request, res: Response, next: NextFunction) {
+    if (!['PUT', 'POST', 'PATCH'].includes(req.method)) {
+      next();
+    }
+
     if (!req.body) {
-      res.status;
-      res.status(422).send('Invalid request');
-      return;
+      return res.status(422).send('Invalid request body!');
     }
 
     for (let key of keys) {
       if (!req.body[key]) {
-        res.status(422).send(`Missing property ${key}`);
-        return;
+        return res.status(422).send(`Missing property ${key}`);
       }
+      next();
     }
-
-    next();
   };
 }
 
-export function controller(routePrefix: string) {
-  return function (target: Function, key?: string, desc?: PropertyDescriptor) {
+export function controller(rootRoute: string) {
+  return function (target: Function) {
     const router = AppRouter.getInstance();
 
-    for (let key in target.prototype) {
-      const routeHandler = target.prototype[key];
+    Object.getOwnPropertyNames(target.prototype).forEach((key) => {
+      const routerHandler = target.prototype[key];
 
       const path = Reflect.getMetadata(
         MetadataKeys.path,
@@ -47,20 +47,20 @@ export function controller(routePrefix: string) {
         Reflect.getMetadata(MetadataKeys.middleware, target.prototype, key) ||
         [];
 
-      const requireBodyProps =
+      const requiredBodyProps =
         Reflect.getMetadata(MetadataKeys.validator, target.prototype, key) ||
         [];
 
-      const validator = bodyValidators(requireBodyProps);
+      const validator = bodyValidators(requiredBodyProps);
 
       if (path) {
         router[method](
-          `${routePrefix}${path}`,
+          `${rootRoute}${path}`,
           ...middlewares,
           validator,
-          routeHandler
+          routerHandler
         );
       }
-    }
+    });
   };
 }

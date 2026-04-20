@@ -11,7 +11,7 @@ function logger(req: Request, res: Response, next: NextFunction) {
 class LoginController {
   @get('/login')
   @use(logger)
-  getLogin(req: Request, res: Response): void {
+  getLogin(req: Request, res: Response) {
     res.send(`
       <form method="POST">
         <div>

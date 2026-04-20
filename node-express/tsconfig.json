@@ -2,13 +2,14 @@
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout
-    // "rootDir": "./src",
-    // "outDir": "./dist",
+    "rootDir": "./src",
+    "outDir": "./build",
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "module": "nodenext",
-    "target": "esnext",
+    "target": "es2022",
+    "module": "commonjs",
+    "moduleResolution": "bundler",
     "types": [],
     // For nodejs:
     // "lib": ["esnext"],
@@ -35,12 +36,12 @@
     // Recommended Options
     "strict": true,
     "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
-    "ignoreDeprecations": "6.0",
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   }

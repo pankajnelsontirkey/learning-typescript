@@ -10,10 +10,30 @@ interface AppProps {
   deleteTodo: Function;
 }
 
-class _App extends React.Component<AppProps> {
+interface AppState {
+  fetching: boolean;
+}
+
+class _App extends React.Component<AppProps, AppState> {
   // componentDidMount(): void {
   //   this.props.fetchTodos();
   // }
+  constructor(props: AppProps) {
+    super(props);
+
+    this.state = { fetching: false };
+  }
+
+  componentDidUpdate(
+    prevProps: Readonly<AppProps>,
+    prevState: Readonly<AppState>,
+    snapshot?: any
+  ): void {
+    if (!prevProps.todos.length && this.props.todos.length) {
+      this.setState({ fetching: false });
+    }
+  }
+
   onButtonClick = (): void => {
     this.props.fetchTodos();
   };
@@ -35,6 +55,7 @@ class _App extends React.Component<AppProps> {
     return (
       <div>
         <button onClick={this.onButtonClick}>Fetch</button>
+        {this.state.fetching ? 'Loading...' : null}
         {this.renderList()}
       </div>
     );

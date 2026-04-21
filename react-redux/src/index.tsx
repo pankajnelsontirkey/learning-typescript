@@ -9,6 +9,10 @@ interface StateProps {
   counter: number;
 }
 
+// const App = (props: AppProps): JSX.Element => {
+//   return <div>{props.color}</div>;
+// };
+
 class App extends React.Component<AppProps, StateProps> {
   // state = { counter: 0 };
 
@@ -39,4 +43,4 @@ class App extends React.Component<AppProps, StateProps> {
   }
 }
 
-ReactDOM.render(<App /* color='red'  */ />, document.querySelector('#root'));
+ReactDOM.render(<App color='red' />, document.querySelector('#root'));

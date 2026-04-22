@@ -1,9 +1,13 @@
+// import GuestList from './state/GuestList';
+// import UserSearch from './state/UserSearch';
+import Event from './events/Event';
+
 function App() {
   return (
     <>
-      <div>
-        <h1>Hello</h1>
-      </div>
+      {/* <UserSearch />
+      <GuestList /> */}
+      <Event />
     </>
   );
 }

@@ -20,6 +20,6 @@
   "devDependencies": {
     "@types/cookie-session": "^2.0.49",
     "@types/express": "^5.0.6",
-    "tsx": "^4.21.0"
+    "tsx": "^4.22.4"
   }
 }
